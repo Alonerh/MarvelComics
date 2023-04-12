@@ -6,6 +6,7 @@ export default createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
         outline: 0;
+        color: #fff;
 
         font-family: 'Marvel', sans-serif;
     }

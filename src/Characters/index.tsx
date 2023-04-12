@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import React from 'react';
 import api from '../api';
-import * as C from './styles';
+import { Container, CardList, Card, ButtonMore } from './styles';
+import { FiChevronDown } from 'react-icons/fi';
+
 
 interface ResponseData {
     id: number,
@@ -21,25 +23,43 @@ const Characters: React.FC = ()=>{
             .get('/characters')
             .then(response => {
                 setCharacters(response.data.data.results);
-                console.log('segundo log: ', characters);
             })
             .catch(err => console.log(err));
 	}, []);
 
+    const handleShowMore = useCallback(async()=>{
+        try {
+            let offset = characters.length;
+            const response = await api.get('/characters', {
+                params: {
+                    offset
+                }
+            })
+            setCharacters([...characters, ...response.data.data.results]);
+        } catch(err) {
+            console.log(err);
+        }
+    }, [characters]);
+
     return (
-        <C.Container>
-            <h1>Characters</h1>
-            <ul>
+        <Container>
+            <CardList>
                 {characters.map((item, index)=>(
-                    <li  key={index}>
-                        <img 
-                            src={`${item.thumbnail.path}.${item.thumbnail.extension}`}
-                            alt={`Foto do ${item.name}`}/>
-                        <span>{item.name}</span>
-                    </li>
+                    <Card key={index} thumbnail={item.thumbnail}>
+                        <div id="img" />
+                        <h2>{item.name}</h2>
+                        <p>{item.description}</p>
+                    </Card>
                 ))}
-            </ul>
-        </C.Container>
+            </CardList>
+            
+            <ButtonMore onClick={handleShowMore}>
+                <FiChevronDown size={20}/>
+                Ver mais
+                <FiChevronDown size={20}/>
+            </ButtonMore>
+
+        </Container>
         )
     
 }
