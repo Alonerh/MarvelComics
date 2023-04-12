@@ -1,0 +1,13 @@
+Crie uma Single Page Application para uma consulta de quadrinhos utilizando a API da Marvel para todos os consumos de dados.
+
+API: https://developer.marvel.com
+
+Documentação: https://developer.marvel.com/docs
+
+GET /v1/public/comics
+
+public: b14cc2ba325bce82c76572be4c3640fd
+
+private: ba9fc7c37e7baa8910efb93a0d239b59bb0c2fae
+
+link resquest = http://gateway.marvel.com/v1/public/comics?
