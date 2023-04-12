@@ -1,7 +1,8 @@
+
 import { useCallback, useEffect, useState } from 'react';
 import React from 'react';
 import api from '../api';
-import { Container, CardList, Card, ButtonMore } from './styles';
+import { Container, CardList, Card, ButtonMore } from '../styles/Characters.styles';
 import { FiChevronDown } from 'react-icons/fi';
 
 
@@ -15,36 +16,37 @@ interface ResponseData {
     };
 }
 
-const Characters: React.FC = ()=>{
-    const [characters, setCharacters] = useState<ResponseData[]>([]);
+const Comics: React.FC = ()=>{
+    const [comics, setComics] = useState<ResponseData[]>([]);
 
     useEffect(()=>{
 		api
-            .get('/characters')
+            .get('/comics')
             .then(response => {
-                setCharacters(response.data.data.results);
+                setComics(response.data.data.results);
             })
             .catch(err => console.log(err));
 	}, []);
 
     const handleShowMore = useCallback(async()=>{
         try {
-            let offset = characters.length;
-            const response = await api.get('/characters', {
+            let offset = comics.length;
+            const response = await api.get('/comics', {
                 params: {
                     offset
                 }
             })
-            setCharacters([...characters, ...response.data.data.results]);
+            setComics([...comics, ...response.data.data.results]);
         } catch(err) {
             console.log(err);
         }
-    }, [characters]);
+    }, [comics]);
 
     return (
         <Container>
+            Comics
             <CardList>
-                {characters.map((item, index)=>(
+                {comics.map((item, index)=>(
                     <Card key={index} thumbnail={item.thumbnail}>
                         <div id="img" />
                         <h2>{item.name}</h2>
@@ -64,4 +66,4 @@ const Characters: React.FC = ()=>{
     
 }
 
-export default Characters;
+export default Comics;
