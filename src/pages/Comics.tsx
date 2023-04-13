@@ -44,7 +44,7 @@ const Comics: React.FC = ()=>{
 
     return (
         <Container>
-            Comics
+            <h1>Comics</h1>
             <CardList>
                 {comics.map((item, index)=>(
                     <Card key={index} thumbnail={item.thumbnail}>

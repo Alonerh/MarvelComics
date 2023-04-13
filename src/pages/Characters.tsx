@@ -42,6 +42,7 @@ const Characters: React.FC = ()=>{
 
     return (
         <Container>
+            <h1>Characters</h1>
             <CardList>
                 {characters.map((item, index)=>(
                     <Card key={index} thumbnail={item.thumbnail}>
