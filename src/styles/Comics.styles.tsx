@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface ThumbnailData {
-    key: number,
+    key?: number,
     thumbnail?: {
         path: string,
         extension: string
@@ -32,7 +32,7 @@ export const CardList = styled.div`
 const urlImg = (props: ThumbnailData) => 
     `${props.thumbnail?.path}.${props.thumbnail?.extension}`;
 
-export const Card = styled.div<ThumbnailData>` 
+export const Card = styled.div` 
     display: inline-block;
     background-color: #222;
     height: 450px;
@@ -92,5 +92,66 @@ export const ButtonMore = styled.div`
         }
     }
 
+`;
+
+export const ModalComics= styled.div<ThumbnailData>`
+    width: fit-content;
+    height: 100px;
+    height: fit-content;
+    position: fixed;
+    border: 2px solid #DC2626;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    background-color: #222;
+    border-radius: 10px;
+
+    .containerModal {
+        margin-bottom: 20px;
+    }
+    .infoComics {
+    }
+    .infoComics2 {
+        display: flex;
+        margin-top: 20px;
+    }
+    .infoComicsInside {
+        width: 500px;
+        height: 500px;
+        margin-left: 30px;
+        overflow-y: scroll;
+    }
+
+    .X {
+        position: absolute;
+        top: 4%;
+        right: 3%;
+        color: red;
+        font-weight: bold;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    h2 {
+        width: 600px;
+        font-size: 30px;
+    }
+    p {
+        font-size: 20px;
+        padding-right: 10px;
+    }
+
+    div#img {
+        width: 100%;
+        height: 500px;
+        background: url(${urlImg}) no-repeat center;
+        background-size: cover;
+        transition: all ease 0.25s;
+        display: flex;
+    }
+
     
 `;
+
+
+

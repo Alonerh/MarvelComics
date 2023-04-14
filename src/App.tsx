@@ -22,15 +22,15 @@ const App:React.FC = () => {
 			<div className="separator2 bg-red-600">
 				<button 
 					className="w-28 mr-3 bg-red-700 p-2 rounded text-2xl hover:bg-slate-200 hover:text-red-600"
-					onClick={()=>handleToCharacters('/characters')}
-					>
-					Characters
-				</button>
-				<button 
-					className="w-28 mr-3 bg-red-700 p-2 rounded text-2xl hover:bg-slate-200 hover:text-red-600"
 					onClick={()=>handleToCharacters('/comics')}
 					>
 					Comics
+				</button>
+				<button 
+					className="w-28 mr-3 bg-red-700 p-2 rounded text-2xl hover:bg-slate-200 hover:text-red-600"
+					onClick={()=>handleToCharacters('/characters')}
+					>
+					Characters
 				</button>
 			</div>
 		</div>

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface ThumbnailData {
-    key: number,
+    key?: number,
     thumbnail?: {
         path: string,
         extension: string
@@ -20,6 +20,7 @@ export const Container = styled.main`
         margin-left: 20px;
         font-weight: bold;
     }
+
 `; 
 
 export const CardList = styled.div` 
@@ -32,7 +33,7 @@ export const CardList = styled.div`
 const urlImg = (props: ThumbnailData) => 
     `${props.thumbnail?.path}.${props.thumbnail?.extension}`;
 
-export const Card = styled.div<ThumbnailData>` 
+export const Card = styled.div` 
     display: inline-block;
     background-color: #222;
     height: 450px;
@@ -42,6 +43,7 @@ export const Card = styled.div<ThumbnailData>`
     border-radius: 5px;
     overflow: hidden;
     box-shadow: 2px 2px 10px 1px rgba(0,0,0,0.3);
+    cursor: pointer;
 
     h2, p {
         padding: 5px;
@@ -70,7 +72,6 @@ export const ButtonMore = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
-
     cursor: pointer;
     box-shadow: 2px 2px 10px 1px rgba(0,0,0,0.3);
     margin: 20px auto;
@@ -93,4 +94,61 @@ export const ButtonMore = styled.div`
     }
 
     
+`;
+
+export const Modal = styled.div<ThumbnailData>`
+    width: auto;
+    height: fit-content;
+    position: fixed;
+    border: 2px solid #DC2626;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #222;
+    border-radius: 10px;
+
+    .containerModal {
+        margin-bottom: 20px;
+    }
+    .infoCharacters {
+    }
+    .infoCharacters2 {
+        display: flex;
+        margin-top: 20px;
+    }
+    .infoCharactersInside {
+        width: 500px;
+        height: 500px;
+        margin-left: 30px;
+        overflow-y: scroll;
+    }
+
+    .X {
+        position: absolute;
+        top: 4%;
+        right: 3%;
+        color: red;
+        font-weight: bold;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    h2 {
+        font-size: 30px;
+        font-weight: bold;
+    }
+    p {
+        font-size: 20px;
+        padding-right: 10px;
+    }
+
+    div#img {
+        width: 300px;
+        height: 500px;
+        background: url(${urlImg}) no-repeat center;
+        background-size: cover;
+        transition: all ease 0.25s;
+        display: flex;
+    }
+
 `;
