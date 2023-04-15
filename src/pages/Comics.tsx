@@ -5,6 +5,7 @@ import api from '../api';
 import { Container, CardList, Card, ButtonMore, Modal } from '../styles/Characters.styles';
 import { ModalComics } from '../styles/Comics.styles';
 import { FiChevronDown } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 
 interface ResponseData {
@@ -108,7 +109,6 @@ const Comics: React.FC = ()=>{
                             <div className="infoComics2">
                                 <div id='img'/>
                                 <div className='infoComicsInside'>
-                                    
                                     <br />
                                     <p>
                                         {nowModal?.description != '' &&
@@ -118,6 +118,10 @@ const Comics: React.FC = ()=>{
                                             'Não há descrição do quadrinho'
                                         }
                                     </p>
+                                    <Link to={'/comics/sendmap'}
+                                        style={{backgroundColor:'#f00', padding:5}}>
+                                        Enviar este quadrinho para seu endereço
+                                    </Link>
                                 </div>
                             </div>  
                         </div>

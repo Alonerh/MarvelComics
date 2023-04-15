@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import GlobalStyle from './styles/global';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import Marvel from './assets/Marvel_Logo.png';
+import SendMap from "./pages/SendMap";
 
 
 const App:React.FC = () => {
@@ -38,6 +39,7 @@ const App:React.FC = () => {
 			<Route path="/" element={<Home />}/>
 			<Route path="/characters" element={<Characters />}/>
 			<Route path="/comics" element={<Comics />}/>
+			<Route path="/comics/sendmap" element={<SendMap />}/>
 		</Routes>
 		<footer className="flex justify-center mb-2 opacity-30">&copy; Feito por Rafael Alcantara</footer>
 		<GlobalStyle />
