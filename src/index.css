@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+body {
+  background-image: url("./src/assets/low-angle-shot-mesmerizing-starry-sky.jpg");
+  background-size: cover;
 }

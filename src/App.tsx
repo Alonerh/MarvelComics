@@ -41,7 +41,7 @@ const App:React.FC = () => {
 			<Route path="/comics" element={<Comics />}/>
 			<Route path="/comics/sendmap" element={<SendMap />}/>
 		</Routes>
-		<footer className="flex justify-center mb-2 opacity-30">&copy; Feito por Rafael Alcantara</footer>
+		<footer className="flex justify-center font-extrabold text-black bg-red-600">&copy; Feito por Rafael Alcantara</footer>
 		<GlobalStyle />
 		</>
 		
