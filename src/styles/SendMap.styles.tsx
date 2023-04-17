@@ -1,8 +1,28 @@
 import styled from "styled-components";
 
 export const ContainerSend = styled.div`
-    width: 100vh;
-    height: 100vh;
+    height: calc(100vh - 109px);
+    background-color: #000;
+
+    .InfoSend {
+        
+
+        h2 {
+            font-weight: bold;
+            font-size: 23px;
+        }
+        h3 {
+            font-weight: bold;
+            font-size: 20px;
+        }
+        p {
+            overflow-y: scroll;    
+            color: #000;
+            background-color: #B91C1C;
+            font-weight: bold;
+            padding-left: 10px;
+        }
+    }
 
     button {
         color: #000;
@@ -17,7 +37,6 @@ export const ContainerSend = styled.div`
         background-color: #B91C1C;
         font-weight: bold;
         font-size: 20px;
-        padding-left: 20px;
     }
 
     img {

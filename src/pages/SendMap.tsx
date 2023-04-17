@@ -4,6 +4,7 @@ import {useState} from 'react';
 import { useAppSelector } from '../redux/hooks/useAppSelector';
 import { useDispatch } from 'react-redux';
 import { setTitle, setDesc } from '../redux/reducers/comicReducer';
+import { useNavigate } from 'react-router-dom';
 
 export interface MapPageProps {
 
@@ -24,7 +25,7 @@ const SendMap = ()=>{
     const [searchBox, setSearchBox] = useState<google.maps.places.SearchBox>();
     const [markers, setMarkers] = useState<any>([]);
     const comic = useAppSelector((state)=>state.comic);
-    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
 
     const position:positionType = {
@@ -46,35 +47,32 @@ const SendMap = ()=>{
             lat: place?.geometry?.location?.lat() || 0,
             lng: place?.geometry?.location?.lng() || 0
 
-        }
+        };
         setMarkers([...markers, location])
         map?.panTo(location);
-    }
-    const handleChangeTitle = ()=>{
-        dispatch(setTitle('Pedro'))
-    }
-    const handleChangeDesc = ()=>{
-        dispatch(setDesc('Descrição de Pedro'))
     }
     
 
     return (
-        <ContainerSend>
-            <button onClick={()=>handleChangeTitle()}>Trocar Nome</button>
-            <button onClick={()=>handleChangeDesc()}>Trocar Desc</button><br />
-            <span>Comic Name: {comic.title}</span><br />
-            <span>Comic Desc: {comic.desc}</span>
+        <ContainerSend style={{display:'flex'}}>
+            <button onClick={()=>navigate(-1)} style={{position:'absolute', padding:'10px'}}>Voltar</button>
+            <div className="InfoSend flex flex-col justify-center items-center w-3/6 p-5">
+                <h2>O quadrinho que será enviado é: </h2>
+                <span>{comic.title}</span>
+                <p>{comic.desc}</p>
+                <h3>Digite o seu endereço abaixo e aperte em enviar!</h3>
+            </div>
             <LoadScript 
                 googleMapsApiKey='AIzaSyAliy-LOADZ-ndxQccI4fUliIcnc9kUReg'
                 libraries={['places']}>
                 <GoogleMap
                     onLoad={onMapLoad}
-                    mapContainerStyle={{width: '99vw', height: '100vh'}}
+                    mapContainerStyle={{width: '100%', height: '100%'}}
                     center={position}
                     zoom={15}
                 >
                     <StandaloneSearchBox onLoad={onLoad} onPlacesChanged={onPlacesChanged}>
-                        <input className='adress' placeholder='Digite um endereço'/>
+                        <input className='adress text-black' placeholder='Digite um endereço' />
                     </StandaloneSearchBox>
                     {markers.map((item:any, index:number)=>(
                         <Marker key={index} position={item}/>
