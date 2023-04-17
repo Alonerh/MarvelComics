@@ -66,10 +66,16 @@ const Comics: React.FC = ()=>{
             setModal(false)
         } else {
             setModal(true)
+            dispatch(setTitle(nowModal[0].title))
+            dispatch(setDesc(
+                nowModal[0].description == '' ? 
+                'Não há descrição do quadrinho' : nowModal[0].description ))
         }
     }
     const handleCloseModal = () =>{
         setModal(false);
+        dispatch(setTitle(''))
+        dispatch(setDesc(''))
         setNowModal([]);
         //console.log('Close NowModal: ', nowModal)
     }
@@ -78,7 +84,7 @@ const Comics: React.FC = ()=>{
     return (
         <Container>
             <h1>Comics</h1>
-            <div className="container-spans ml-4">
+            <div className="container-spans ml-4 fixed">
                 <span>Comic Name: {comic.title}</span><br />
                 <span>Comic Desc: {comic.desc}</span>
             </div>
