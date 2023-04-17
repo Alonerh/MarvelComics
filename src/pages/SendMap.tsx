@@ -1,6 +1,6 @@
 import { GoogleMap, LoadScript, Marker, StandaloneSearchBox } from '@react-google-maps/api';
 import { ContainerSend } from '../styles/SendMap.styles'
-import {useState} from 'react';
+import {ChangeEvent, useState} from 'react';
 import { useAppSelector } from '../redux/hooks/useAppSelector';
 import { useDispatch } from 'react-redux';
 import { setTitle, setDesc } from '../redux/reducers/comicReducer';
@@ -26,6 +26,7 @@ const SendMap = ()=>{
     const [markers, setMarkers] = useState<any>([]);
     const comic = useAppSelector((state)=>state.comic);
     const navigate = useNavigate();
+    const [adressValue, setAdressValue] = useState('');
 
 
     const position:positionType = {
@@ -51,6 +52,16 @@ const SendMap = ()=>{
         setMarkers([...markers, location])
         map?.panTo(location);
     }
+
+    const handleSubmit = (e:React.FormEvent<HTMLFormElement>)=>{
+        e.preventDefault();
+        alert(`Seu pedido foi enviado para: ${adressValue}`);
+        setAdressValue('');
+    }
+    const toPassAdress = (e:ChangeEvent<HTMLInputElement>)=>{
+       setAdressValue(e.target.value);
+    }
+    
     
 
     return (
@@ -58,10 +69,21 @@ const SendMap = ()=>{
             <button onClick={()=>navigate(-1)} style={{position:'absolute', padding:'10px'}}>Voltar</button>
             <div className="InfoSend flex flex-col justify-center items-center w-3/6 p-5">
                 <h2>O quadrinho que será enviado é: </h2>
-                <span>{comic.title}</span>
-                <p>{comic.desc}</p>
-                <h3>Digite o seu endereço abaixo e aperte em enviar!</h3>
+                <div className="texts-container">
+                    <span>{comic.title}</span>
+                    <p>{comic.desc}</p>
+                </div>
+                <h2>Digite o seu endereço abaixo e aperte em enviar!</h2>
+                <form onSubmit={handleSubmit}>
+                    <input type="text" placeholder='Digite o endereço' 
+                        value={adressValue} 
+                        onChange={toPassAdress}/>
+                    <input type="submit" className='submit' 
+                        value={'Enviar'}
+                    />
+                </form>
             </div>
+            
             <LoadScript 
                 googleMapsApiKey='AIzaSyAliy-LOADZ-ndxQccI4fUliIcnc9kUReg'
                 libraries={['places']}>
@@ -72,7 +94,9 @@ const SendMap = ()=>{
                     zoom={15}
                 >
                     <StandaloneSearchBox onLoad={onLoad} onPlacesChanged={onPlacesChanged}>
-                        <input className='adress text-black' placeholder='Digite um endereço' />
+                        <input className='adress text-black border' 
+                        placeholder='Procurar locais' 
+                        value={''}/>
                     </StandaloneSearchBox>
                     {markers.map((item:any, index:number)=>(
                         <Marker key={index} position={item}/>

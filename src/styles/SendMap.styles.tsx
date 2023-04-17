@@ -5,22 +5,39 @@ export const ContainerSend = styled.div`
     background-color: #000;
 
     .InfoSend {
-        
+        display: flex;
+        text-align: center;
+
+        .texts-container {
+            background-color: #B91C1C;
+        }
 
         h2 {
             font-weight: bold;
             font-size: 23px;
-        }
-        h3 {
-            font-weight: bold;
-            font-size: 20px;
+            margin: 10px 0;
         }
         p {
             overflow-y: scroll;    
             color: #000;
-            background-color: #B91C1C;
+            background-color: gray;
             font-weight: bold;
             padding-left: 10px;
+        }
+        form input {
+            width: 300px ;
+            padding: 2px 20px;
+            color: #000;
+        } 
+        form .submit {
+            background-color: #EE171F;
+            padding: 2px 20px;
+            cursor: pointer;
+
+            &:hover {
+                color: rgb(185 28 28);
+                background-color: rgb(226 232 240);
+            }
         }
     }
 
@@ -33,16 +50,17 @@ export const ContainerSend = styled.div`
     }
 
     span {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
         color: #000;
         background-color: #B91C1C;
         font-weight: bold;
-        font-size: 20px;
+        font-size: 17px;
     }
 
     img {
         margin-top: -30px;
     }
-    input {
+    .adress {
         color: #000;
         box-sizing: border-box;
         border: 1px solid transparent;
