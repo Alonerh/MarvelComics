@@ -56,11 +56,11 @@ const Comics: React.FC = ()=>{
         } catch(err) {
             console.log(err);
         }
-    }, []);
+    }, [comics]);
 
     const handleShowModal = async(index:number)=>{
         nowModal.push(comics[index]);
-        console.log('Modal do Push: ', nowModal);
+        //console.log('Modal do Push: ', nowModal);
         
         if(modal) {
             setModal(false)
@@ -71,7 +71,7 @@ const Comics: React.FC = ()=>{
     const handleCloseModal = () =>{
         setModal(false);
         setNowModal([]);
-        console.log('Close NowModal: ', nowModal)
+        //console.log('Close NowModal: ', nowModal)
     }
 
 

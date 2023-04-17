@@ -5,26 +5,26 @@ import { Container, CardList, Card, ButtonMore, Modal } from '../styles/Characte
 import { FiChevronDown } from 'react-icons/fi';
 
 interface ResponseData {
-    id: number,
+    id?: number,
     name: string,
     description: string,
     thumbnail: {
         path: string,
         extension: string
-    };
+    },
+    title?: string
 }
 
 
 const Characters: React.FC = ()=>{
     const [characters, setCharacters] = useState<ResponseData[]>([]);
     const[modal, setModal] = useState(false);
-    const[nowModal, setNowModal] = useState<ResponseData>();
+    const[nowModal, setNowModal] = useState<ResponseData[]>([]);
 
     useEffect(()=>{
 		api
             .get('/characters')
             .then(response => {
-                console.log(response.data.data.results);
                 setCharacters(response.data.data.results);
             })
             .catch(err => console.log(err));
@@ -45,14 +45,7 @@ const Characters: React.FC = ()=>{
     }, [characters]);
 
     const handleShowModal = async(index:number)=>{
-        await api
-            .get('/characters')
-            .then(response => {
-                console.log('NowModal: ', console.log(nowModal));
-                setNowModal(characters[index])
-                // setComics(response.data.data.results[index])
-            })
-            .catch(err => console.log(err));
+        nowModal.push(characters[index]);
 
         if(modal) {
             setModal(false)
@@ -61,7 +54,8 @@ const Characters: React.FC = ()=>{
         }
     }
     const handleCloseModal = () =>{
-        setModal(false)
+        setModal(false);
+        setNowModal([]);
     }
 
     return (
@@ -85,22 +79,22 @@ const Characters: React.FC = ()=>{
                     </Card>
                 ))}
                 {modal &&
-                    <Modal thumbnail={nowModal?.thumbnail}>
+                    <Modal thumbnail={nowModal[0].thumbnail}>
                         <div className="containerModal flex justify-end">
                             <div className='X'  onClick={()=>handleCloseModal()}>X</div>
                         </div>
                         <div className="infoCharacters">
-                            <h2>{nowModal?.name}</h2>
+                            <h2>{nowModal[0].name}</h2>
                             <div className="infoCharacters2">
                                 <div id='img'/>
                                 <div className='infoCharactersInside'>
                                     
                                     <br />
                                     <p>
-                                        {nowModal?.description != '' &&
-                                            nowModal?.description
+                                        {nowModal[0].description != '' &&
+                                            nowModal[0].description
                                         }
-                                        {nowModal?.description == '' &&
+                                        {nowModal[0].description == '' &&
                                             'Não há descrição do personagem'
                                         }
                                     </p>
