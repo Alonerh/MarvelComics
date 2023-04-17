@@ -1,8 +1,12 @@
 import { GoogleMap, LoadScript, Marker, StandaloneSearchBox } from '@react-google-maps/api';
 import { ContainerSend } from '../styles/SendMap.styles'
 import {useState} from 'react';
+import { useAppSelector } from '../redux/hooks/useAppSelector';
+import { useDispatch } from 'react-redux';
+import { setTitle, setDesc } from '../redux/reducers/comicReducer';
 
 export interface MapPageProps {
+
 
 }
 
@@ -19,6 +23,9 @@ const SendMap = ()=>{
     const [map, setMap] = useState<google.maps.Map>();
     const [searchBox, setSearchBox] = useState<google.maps.places.SearchBox>();
     const [markers, setMarkers] = useState<any>([]);
+    const comic = useAppSelector((state)=>state.comic);
+    const dispatch = useDispatch();
+
 
     const position:positionType = {
         lat: -7.222795687119939, 
@@ -43,10 +50,20 @@ const SendMap = ()=>{
         setMarkers([...markers, location])
         map?.panTo(location);
     }
+    const handleChangeTitle = ()=>{
+        dispatch(setTitle('Pedro'))
+    }
+    const handleChangeDesc = ()=>{
+        dispatch(setDesc('Descrição de Pedro'))
+    }
     
 
     return (
         <ContainerSend>
+            <button onClick={()=>handleChangeTitle()}>Trocar Nome</button>
+            <button onClick={()=>handleChangeDesc()}>Trocar Desc</button><br />
+            <span>Comic Name: {comic.title}</span><br />
+            <span>Comic Desc: {comic.desc}</span>
             <LoadScript 
                 googleMapsApiKey='AIzaSyAliy-LOADZ-ndxQccI4fUliIcnc9kUReg'
                 libraries={['places']}>

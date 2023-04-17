@@ -3,12 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 export const slice = createSlice({
     name: 'comic',
     initialState: {
-        name: 'Nome Qualquer',
+        title: 'Nome Qualquer',
         desc: 'Descrição Qualquer'
     },
     reducers: {
-        setName: (state, action)=>{
-            state.name = action.payload;
+        setTitle: (state, action)=>{
+            state.title = action.payload;
         },
         setDesc: (state, action) =>{
             state.desc = action.payload;
@@ -16,5 +16,5 @@ export const slice = createSlice({
     }
 });
 
-export const { setName, setDesc } = slice.actions;
+export const { setTitle, setDesc } = slice.actions;
 export default slice.reducer;

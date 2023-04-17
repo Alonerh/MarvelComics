@@ -4,6 +4,22 @@ export const ContainerSend = styled.div`
     width: 100vh;
     height: 100vh;
 
+    button {
+        color: #000;
+        background-color: purple;
+    }
+    button:hover {
+        background-color: burlywood;
+    }
+
+    span {
+        color: #000;
+        background-color: #B91C1C;
+        font-weight: bold;
+        font-size: 20px;
+        padding-left: 20px;
+    }
+
     img {
         margin-top: -30px;
     }
